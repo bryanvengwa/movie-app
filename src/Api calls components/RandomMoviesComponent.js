@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import NoInternet  from "../Components/NoInternet";
 import Navbar from "../Components/Navbar";
 // const placeholderImage = "https://via.placeholder.com/500x750";
 // const key = "9533ec88cac9ff68a885ffdcf25560f5";
@@ -14,20 +15,19 @@ import Navbar from "../Components/Navbar";
 const RandomMoviesComponent = () => {
 	const [movies, setMovies] = useState([]);
 	const [page, setPage] = useState(1);
-          const [movieType, setMovieType] = useState('movie')
-           const [genre , setGenre ] = useState('')
-	
-const genreSetter=(id)=>{
-          if(id>0){
+	const [movieType, setMovieType] = useState("movie");
+	const [genre, setGenre] = useState("");
+	const [NoInternets , setNoInternets] = useState(false)
 
-                    setGenre(`&with_genres=${id}`);
-          }else{
-                    setGenre('');
-
-          }
-          
-}
+	const genreSetter = (id) => {
+		if (id > 0) {
+			setGenre(`&with_genres=${id}`);
+		} else {
+			setGenre("");
+		}
+	};
 	useEffect(() => {
+
 		const fetchMovies = async () => {
 			const apiKey = "9533ec88cac9ff68a885ffdcf25560f5";
 			const url = `https://api.themoviedb.org/3/discover/${movieType}?api_key=${apiKey}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${page}${genre}`;
@@ -35,19 +35,23 @@ const genreSetter=(id)=>{
 			try {
 				const response = await fetch(url);
 				const data = await response.json();
-				console.log(data.results);
-				setMovies(data.results);
+		
+				if (!data.total_results) {
+					throw new Error("no internet");
+				}else{
+					setNoInternets(old=>!old)
+
+					setMovies(data.results);
+				}
 			} catch (error) {
-				console.error("Error fetching movies:", error);
+				console.error(error);
 			}
 		};
 		fetchMovies();
-	}, [page , movieType , genre]);
-          const changeMovieType=() => {
-                    setMovieType((movieType) => (
-                              movieType ==="movie"? "tv" : 'movie'
-                    ))
-          }
+	}, [page, movieType, genre]);
+	const changeMovieType = () => {
+		setMovieType((movieType) => (movieType === "movie" ? "tv" : "movie"));
+	};
 
 	const handleNextPage = () => {
 		setPage(page + 1);
@@ -67,13 +71,14 @@ const genreSetter=(id)=>{
 
 	return (
 		<div className="right-side side">
-			<Navbar   genreSetter={genreSetter}
+			<Navbar
+				genreSetter={genreSetter}
 				changeMovieType={changeMovieType}
 				handleNextPage={handleNextPage}
 				handlePreviousPage={handlePreviousPage}
 			/>
 
-			<div className="movie-container">
+		{ NoInternets ||	<div className="movie-container">
 				<div
 					className="movie-containers"
 					style={{ display: "flex", flexWrap: "wrap" }}
@@ -98,7 +103,8 @@ const genreSetter=(id)=>{
 						</div>
 					))}
 				</div>
-			</div>
+			</div>}
+			{NoInternets && <NoInternet />}
 		</div>
 	);
 };

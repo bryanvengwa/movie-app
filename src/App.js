@@ -1,9 +1,7 @@
 import "./App.css";
 import Home from "./Home";
 import {BrowserRouter as Router ,  Routes , Route} from 'react-router-dom'
-// import SettingsBar from "./Components/SettingsBar";
-// import {Routes} from 'react-router-dom'
-// import Modal from "./Components/Modal";
+
 
 
 
@@ -15,8 +13,6 @@ function App() {
 					<Route path="/" element={<Home />} />
 				</Routes>
 
-				{/* <SettingsBar/> */}
-				{/* <Modal/> */}
 			</div>
 		</Router>
 	);

@@ -5,15 +5,16 @@ import RandomMoviesComponent from "./Api calls components/RandomMoviesComponent"
 import Result from "./Result";
 import Loader from "./Components/Loader";
 import Footer from "./Components/Footer";
-
+import NoInternet from "./Components/NoInternet";
+import MovieNotFound from "./Components/MovieNotFound";
 export default function Home() {
 	const [value, setValue] = useState("");
-	const [url, setUrl] = useState("r");
+	const [url, setUrl] = useState('');
 	
 	const apiKey = "9533ec88cac9ff68a885ffdcf25560f5";
 
-	const { data, isLoading } = useFetch(url);
-	console.log(data);
+	const { data, isLoading , error } = useFetch(url);
+	console.log(error)
 
 	const searcher = (query) => {
 		if (value.trim() !== "") {
@@ -56,12 +57,18 @@ export default function Home() {
 						/>
 						<FaSearch onClick={searcher} className="search" />
 					</div>
-                                                  { isLoading && <Loader/>}
-					<div className="results-container">{resultsElements}</div>
+					{isLoading && <Loader />}
+					<div className="results-container">
+						{resultsElements}
+						{/* from here downward there is management of errors */}
+						{error === "Failed to fetch" && <NoInternet />}
+						{error === "no results" && <MovieNotFound />}
+					</div>
 				</div>
+				
 				<RandomMoviesComponent />
 			</div>
-			<Footer/>
+			<Footer />
 		</div>
 	);
 }
