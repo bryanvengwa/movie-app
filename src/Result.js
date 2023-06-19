@@ -1,24 +1,18 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { darkThemeContext } from './Components/Context/DarkThemContext';
+
 
 export default function Result(props) {
+	const {themeValue} = useContext(darkThemeContext)
+		const styles = {
+			backgroundColor: `${themeValue ? "initial" : "whitesmoke"}`,
+			color: `${themeValue ? "white" : "black"}`,
+		};
   return (
 		<>
-			{props.id && (
-				<div className="result">
-					<div className="img-container">
-						<img
-							src="imgs/movie.jpeg"
-							className="img-fluid"
-							alt=""
-						/>
-					</div>
-					<div className="body">
-						<h2>MOVIE NAME: dummy name</h2>
-					</div>
-				</div>
-			)}
+			
 			{props.id || (
-				<div className="result">
+				<div style={styles} className="result">
 					<div className="img-container">
 						{props.img && (
 							<img
@@ -27,17 +21,11 @@ export default function Result(props) {
 								alt=""
 							/>
 						)}
-						{props.img || (
-							<img
-								src={'imgs/movie.jpeg'}
-								className="img-fluid"
-								alt=""
-							/>
-						)}
+						
 					</div>
-					<div className="body">
+					<div style={styles} className="body">
 						<h2>
-							 <span>{props.name}</span>
+							<span>{props.name}</span>
 						</h2>
 					</div>
 				</div>

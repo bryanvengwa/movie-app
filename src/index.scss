@@ -57,6 +57,9 @@ body{
 @mixin center{
    display: flex; justify-content: center; align-items: center !important; 
 }
+.home{overflow-y: hidden !important; overflow-x: scroll; 
+.sides-container{min-width: 820px;}
+}
 button{cursor: pointer ;}
 button:hover{transform: scale(1.05);}
 .search-input:hover{transform: scale(1.025);}
@@ -88,11 +91,11 @@ img{height: 100%; width: 100%; position: relative; object-fit: cover; }
   }
 height: 85vh;
 }
-footer{height: 14vh; width: 100vw; background: rgba(18, 18, 18, ); }
+footer{height: 12vh; min-width: 820px; width: 100%; background: rgba(18, 18, 18, ); }
 .right-side{ position: relative !important; background: rgba(18, 18, 18, ); border-radius: 7px;  width: 70%; height: 85vh; }
 }
 .movie-containers{display: flex; justify-content: center;}
-.movie-container{   position: absolute; left: 0;
+.movie-container{ background: rgba(36, 35, 35, 0.143);   position: absolute; left: 0;
    width: 100%; bottom: 0rem; overflow-y: scroll; height: 85.3%; 
 }
 
@@ -160,7 +163,7 @@ span{
   height: 100%;
   color: white;
   z-index: 6000;
-  position: relative;
+  // position: ;
   font-family: 'medium';
 }
 .no-movie{@include center; flex-direction: column;

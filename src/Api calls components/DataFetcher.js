@@ -27,8 +27,8 @@ const fetchReducer = (state, action) => {
 // let searchTerm;
 // const apiKey = "458fbed6";
 // fetch('https://api.themoviedb.org/3/search/collection?query=avengers&include_adult=false&language=en-US&page=1', options)
-const apiUrl = `'https://api.themoviedb.org/3/search/collection?query=avengers&include_adult=false&language=en-US&page=1', options`;
-console.log(apiUrl);
+// const apiUrl = `'https://api.themoviedb.org/3/search/collection?query=avengers&include_adult=false&language=en-US&page=1', options`;
+
 
 const useFetch = (url) => {
 	const initialState = {

@@ -1,12 +1,17 @@
 import "./App.css";
 import Home from "./Home";
 import {BrowserRouter as Router ,  Routes , Route} from 'react-router-dom'
+import DarkThemeContextProvider from "./Components/Context/DarkThemContext";
+import { ColorContextProvider } from "./Components/Context/currentColorReducer";
 
 
 
 
 function App() {
 	return (
+		<ColorContextProvider>
+		<DarkThemeContextProvider>
+
 		<Router>
 			<div className="App">
 				<Routes>
@@ -15,6 +20,9 @@ function App() {
 
 			</div>
 		</Router>
+
+		</DarkThemeContextProvider>
+		</ColorContextProvider>
 	);
 }
 

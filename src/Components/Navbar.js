@@ -1,8 +1,11 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import '../css/Navbar.scss'
 import DropDown from './DropDown';
 import {FaCog } from 'react-icons/fa'
 import SettingsBar from './SettingsBar';
+import { colorContext } from './Context/currentColorReducer';
+import { darkThemeContext } from './Context/DarkThemContext';
+
 
 
 
@@ -16,6 +19,13 @@ export default function Navbar(props) {
 		setMovieType((movieType) =>
 			movieType === "Movies" ? "Series" : "Movies"
 		);
+		// color change Functionality
+		const {color} = useContext(colorContext)
+		const colorStyles={
+			border:`3px solid ${color}`
+		}
+
+		const {themeValue} = useContext(darkThemeContext)
   return (
 		<nav>
 			<div className="padding-container">
@@ -33,6 +43,7 @@ export default function Navbar(props) {
 				<div className="flex-container">
 					<DropDown genreSetter={props.genreSetter} />
 					<button
+						style={colorStyles}
 						className="type-of-movie-button"
 						onClick={() => {
 							props.changeMovieType();
@@ -41,9 +52,9 @@ export default function Navbar(props) {
 					>
 						{movieType}
 					</button>
-					
-          <FaCog onClick={toggleSettings} className='wheel' />
-       { displaySettings &&   <SettingsBar/>}
+
+					<FaCog style={{color:`${themeValue ? ' rgba(255, 255, 255, 0.308)':'black'}`}} onClick={toggleSettings} className="wheel" />
+					{displaySettings && <SettingsBar />}
 				</div>
 			</div>
 		</nav>

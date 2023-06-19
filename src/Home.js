@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { FaSearch } from "react-icons/fa";
 import useFetch from "./Api calls components/DataFetcher";
 import RandomMoviesComponent from "./Api calls components/RandomMoviesComponent";
@@ -7,18 +7,19 @@ import Loader from "./Components/Loader";
 import Footer from "./Components/Footer";
 import NoInternet from "./Components/NoInternet";
 import MovieNotFound from "./Components/MovieNotFound";
+import { darkThemeContext } from "./Components/Context/DarkThemContext";
+import { colorContext } from "./Components/Context/currentColorReducer";
 export default function Home() {
 	const [value, setValue] = useState("");
-	const [url, setUrl] = useState('');
-	
+	const [url, setUrl] = useState("");
+
 	const apiKey = "9533ec88cac9ff68a885ffdcf25560f5";
 
-	const { data, isLoading , error } = useFetch(url);
-	console.log(error)
+	const { data, isLoading, error } = useFetch(url);
 
 	const searcher = (query) => {
 		if (value.trim() !== "") {
-                              setValue('')
+			setValue("");
 			setUrl(
 				`https://api.themoviedb.org/3/search/movie?query=${value}&include_adult=false&language=en-US&page=1&api_key=${apiKey}`
 			);
@@ -27,7 +28,7 @@ export default function Home() {
 	let info;
 	let resultsElements;
 	if (data) {
-		console.log(data.results);
+		
 		info = data.results;
 		const resultsElementss = info.map((movie) => {
 			return (
@@ -43,10 +44,25 @@ export default function Home() {
 	const handleValueChange = (e) => {
 		setValue(e.target.value);
 	};
+
+	// /////    DARK THEME STYLES
+	const { themeValue } = useContext(darkThemeContext);
+	const styles = {
+		backgroundColor: `${
+			themeValue ? "rgba(36, 35, 35, 0.143)" : "whitesmoke"
+		}`,
+		color: `${themeValue ? "white" : "black"}`,
+	};
+	// COLOR Context
+	const {color} = useContext(colorContext)
+	const homeStyles = {
+		backgroundColor: `${themeValue ? "black" : `${color}`}`,
+		color: `${themeValue ? "white" : "black"}`,
+	};
 	return (
-		<div className="home">
+		<div style={homeStyles}  className="home">
 			<div className="sides-container">
-				<div className="left-side side">
+				<div style={styles} className="left-side side">
 					<div className="search-container">
 						<input
 							className="search-input"
@@ -60,12 +76,12 @@ export default function Home() {
 					{isLoading && <Loader />}
 					<div className="results-container">
 						{resultsElements}
-						{/* from here downward there is management of errors */}
+						
 						{error === "Failed to fetch" && <NoInternet />}
 						{error === "no results" && <MovieNotFound />}
 					</div>
 				</div>
-				
+
 				<RandomMoviesComponent />
 			</div>
 			<Footer />

@@ -71,13 +71,13 @@ nav{  width: 100% !important; height: 10% !important;
 .dropdown-container{z-index: 400; width: 80%;  top: 3.4em; padding: 0.5em; left:5%; font-family: 'light'; display: flex; position: absolute; flex-direction: column;  color: black; background: rgba(255, 255, 255, 0.145); backdrop-filter: blur(30px); 
 }
 .dropdown-container{  p:hover{color: white;}}
-.bar-container{ position: absolute; top: 5.5rem; z-index: 400; background: white; border-radius: 5px; border: 2px solid grey; padding: 1em; display: flex; gap: 1rem; flex-direction: column; width: 20rem; height: 8rem; 
+.bar-container{ position: absolute; top: 5.5rem; z-index: 400; background: white; border-radius: 5px; border: 2px solid grey; padding: 1em; display: flex; gap: 1rem; flex-direction: column; width: 20rem; height: 9em; 
 font-family: 'heavy';
           .colour-container{ display: flex; gap: 1em;
-          .color{height: 3rem;  width:3rem; border-radius: 50%; cursor: pointer; }
+          .color{height: 3rem;  width:3rem; border-radius: 50%; cursor: pointer;   }
           } 
           .bottom-container{display: flex; justify-content: center; align-items: center;
-                    .toggler{display: flex; justify-content: center; align-items: center; cursor: pointer; }
+                    .toggler{display: flex; justify-content: center; align-items: center; width: 8rem; cursor: pointer; padding: 0.3em; border: 2px solid black; }
           .bulb{color: black; font-size: 2rem; }
           }
 
@@ -89,8 +89,12 @@ font-family: 'heavy';
   
 }
 .wheel:hover{transform: scale(1.8) !important;}
-
-
+.active{ animation: active 0.01s   linear; }
+@keyframes active{
+  from{ transform: translateY(-0.5em);}
+  to{ transform:  translateY(0em);}
+  
+}
 /*
 ####################################################
 M E D I A  Q U E R I E S

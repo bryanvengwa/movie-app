@@ -1,15 +1,8 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import NoInternet  from "../Components/NoInternet";
 import Navbar from "../Components/Navbar";
-// const placeholderImage = "https://via.placeholder.com/500x750";
-// const key = "9533ec88cac9ff68a885ffdcf25560f5";
-// const key = "9533ec88cac9ff68a885ffdcf25560f5";
-// const key = "9533ec88cac9ff68a885ffdcf25560f5";
-// eslint-disable-next-line
-// console.log(key)
-//
-
-// const key = 'bry'
+// import Loader from 
+import { darkThemeContext } from "../Components/Context/DarkThemContext";
 
 // const key = "9533ec88cac9ff68a885ffdcf25560f5";import React, { useEffect, useState } from 'react';
 const RandomMoviesComponent = () => {
@@ -68,9 +61,14 @@ const RandomMoviesComponent = () => {
 			return "https://via.placeholder.com/500x750";
 		}
 	};
-
+///////// MANAGEMENT OF THE DARK styles
+const {themeValue} = useContext(darkThemeContext)
+const styles = {
+	backgroundColor: `${themeValue ? "" : "whitesmoke"}`,
+	color: `${themeValue ? "white" : "black"}`,
+};
 	return (
-		<div className="right-side side">
+		<div style={styles} className="right-side side">
 			<Navbar
 				genreSetter={genreSetter}
 				changeMovieType={changeMovieType}
