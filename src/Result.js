@@ -10,9 +10,15 @@ export default function Result(props) {
 		};
   return (
 		<>
-			
 			{props.id || (
-				<div style={styles} className="result">
+				<div
+					style={styles}
+					onClick={()=>{
+						props.dataSetter()
+						props.toggleModal(true)
+					}}
+					className="result"
+				>
 					<div className="img-container">
 						{props.img && (
 							<img
@@ -21,7 +27,6 @@ export default function Result(props) {
 								alt=""
 							/>
 						)}
-						
 					</div>
 					<div style={styles} className="body">
 						<h2>

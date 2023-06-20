@@ -53,9 +53,22 @@ $background : rgba(3,12 , 31);
 $blue : rgba(6,23 , 72);
 
 
-.modal-background{width: 100vw; height: 100vh; background: black; display: flex; align-items: center; justify-content: center;
-
-          .modal-container{width: 90%; background: $backgroundmovie; height: 50%; }
+.modal-background{width: 100%; z-index: 200;  height: 85%; background: rgba(0, 0, 0, 0.169); backdrop-filter: blur(2px); position: absolute;bottom: 0; display: flex; align-items: center; justify-content: center;
+          .flex-container{display: flex;}
+	.movie-details{ margin-top: 1em; display: flex;   padding: 0.5em;   flex-direction: column; text-align: left; justify-content: flex-end !important;
+	h1{font-size: 3rem; font-family: 'black'; width: 80%;}
+	h3{font-size: 1.4rem; font-family: 'medium'; }
+	// .scroll-container{overflow-y: scroll !important;}
+	.scroll{height: 100%;   }
+	} 
+	.modal-container{ position: relative; overflow-y: scroll !important;
+	.close-button{background: none; position: absolute; right: 1em; width: 8rem; font-family: 'medium';  border:2px solid red; height: 3.5em; background: black; padding: 0 2.4em; color: white; border-radius: 4px; }	
+		width: 80%;  height: 65%; background: black; padding: 1em;
+	.img-container{width: 26rem; height:22rem; position: relative;
+	img{height: 23rem; width: 18rem; object-fit: cover; }
+	h3{position: absolute;  top: 25px; right: 25px; padding: 0.2em; color: black;  background: yellow; }
+	}
+	}
 }
 
 

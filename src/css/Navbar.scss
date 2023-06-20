@@ -56,7 +56,7 @@ nav{  width: 100% !important; height: 10% !important;
         @include center; justify-content: space-between;
         .button-container{display: flex;}
           .arrows{ border-radius: 50%; padding: 0.75em;   @include center; border: none; font-weight: 900; height: 2.4rem; width: 2.4rem; color: white; font-size: 2rem; background: rgba(4, 4, 12, 0.5); }
-          .flex-container{ display: flex; gap: 1em;
+          .flex-container{ display: flex; gap: 1em; margin-right: 1.4em;
 
                     .type-of-movie-button{background: none; width: 8rem; font-family: 'medium';  border:2px solid red; height: 3.5em; background: black; padding: 0 2.4em; color: white; border-radius: 4px; }
           }

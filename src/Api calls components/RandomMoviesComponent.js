@@ -1,16 +1,17 @@
 import { useContext, useEffect, useState } from "react";
-import NoInternet  from "../Components/NoInternet";
+import NoInternet from "../Components/NoInternet";
 import Navbar from "../Components/Navbar";
-// import Loader from 
+
+import Modal from "../Components/Modals";
 import { darkThemeContext } from "../Components/Context/DarkThemContext";
 
 // const key = "9533ec88cac9ff68a885ffdcf25560f5";import React, { useEffect, useState } from 'react';
-const RandomMoviesComponent = () => {
+const RandomMoviesComponent = (props) => {
 	const [movies, setMovies] = useState([]);
 	const [page, setPage] = useState(1);
 	const [movieType, setMovieType] = useState("movie");
 	const [genre, setGenre] = useState("");
-	const [NoInternets , setNoInternets] = useState(false)
+	const [NoInternets, setNoInternets] = useState(false);
 
 	const genreSetter = (id) => {
 		if (id > 0) {
@@ -20,7 +21,6 @@ const RandomMoviesComponent = () => {
 		}
 	};
 	useEffect(() => {
-
 		const fetchMovies = async () => {
 			const apiKey = "9533ec88cac9ff68a885ffdcf25560f5";
 			const url = `https://api.themoviedb.org/3/discover/${movieType}?api_key=${apiKey}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${page}${genre}`;
@@ -28,11 +28,11 @@ const RandomMoviesComponent = () => {
 			try {
 				const response = await fetch(url);
 				const data = await response.json();
-		
+
 				if (!data.total_results) {
 					throw new Error("no internet");
-				}else{
-					setNoInternets(old=>!old)
+				} else {
+					setNoInternets((old) => !old);
 
 					setMovies(data.results);
 				}
@@ -61,12 +61,12 @@ const RandomMoviesComponent = () => {
 			return "https://via.placeholder.com/500x750";
 		}
 	};
-///////// MANAGEMENT OF THE DARK styles
-const {themeValue} = useContext(darkThemeContext)
-const styles = {
-	backgroundColor: `${themeValue ? "" : "whitesmoke"}`,
-	color: `${themeValue ? "white" : "black"}`,
-};
+	///////// MANAGEMENT OF THE DARK styles
+	const { themeValue } = useContext(darkThemeContext);
+	const styles = {
+		backgroundColor: `${themeValue ? "" : "whitesmoke"}`,
+		color: `${themeValue ? "white" : "black"}`,
+	};
 	return (
 		<div style={styles} className="right-side side">
 			<Navbar
@@ -76,32 +76,41 @@ const styles = {
 				handlePreviousPage={handlePreviousPage}
 			/>
 
-		{ NoInternets ||	<div className="movie-container">
-				<div
-					className="movie-containers"
-					style={{ display: "flex", flexWrap: "wrap" }}
-				>
-					{movies.map((movie) => (
-						<div className=" random-movie">
-							<img
-								key={movie.id}
-								src={getRandomImage(movie)}
-								alt={movie.title}
-								className="img-fluid"
-								style={{
-									width: "200px",
-									height: "300px",
-								}}
-							/>
-							<h3>{movie["vote_average"]}</h3>
-							<div className="overlay active-overlay">
-								<h1>{movie.original_title}</h1>
-								<p>{movie.overview}</p>
+			{/* Where i have placed the modal */}
+			{props.displayModal && (
+				<Modal
+					movieData={props.movieData}
+					toggleModal={props.toggleModal}
+				/>
+			)}
+			{NoInternets || (
+				<div className="movie-container">
+					<div
+						className="movie-containers"
+						style={{ display: "flex", flexWrap: "wrap" }}
+					>
+						{movies.map((movie) => (
+							<div className=" random-movie">
+								<img
+									key={movie.id}
+									src={getRandomImage(movie)}
+									alt={movie.title}
+									className="img-fluid"
+									style={{
+										width: "200px",
+										height: "300px",
+									}}
+								/>
+								<h3>{movie["vote_average"]}</h3>
+								<div className="overlay active-overlay">
+									<h1>{movie.original_title}</h1>
+									<p>{movie.overview}</p>
+								</div>
 							</div>
-						</div>
-					))}
+						))}
+					</div>
 				</div>
-			</div>}
+			)}
 			{NoInternets && <NoInternet />}
 		</div>
 	);
