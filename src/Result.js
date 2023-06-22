@@ -14,7 +14,7 @@ export default function Result(props) {
 				<div
 					style={styles}
 					onClick={()=>{
-						props.dataSetter()
+						props.dataSetter(props.movie)
 						props.toggleModal(true)
 					}}
 					className="result"

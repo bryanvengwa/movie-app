@@ -53,7 +53,7 @@ $background : rgba(3,12 , 31);
 $blue : rgba(6,23 , 72);
 
 
-.modal-background{width: 100%; z-index: 200;  height: 85%; background: rgba(0, 0, 0, 0.169); backdrop-filter: blur(2px); position: absolute;bottom: 0; display: flex; align-items: center; justify-content: center;
+.modal-background{width: 100%; z-index: 200;  height: 85%; background: rgba(0, 0, 0, 0.169); backdrop-filter: blur(1px); position: absolute;bottom: 0; display: flex; align-items: center; justify-content: center;
           .flex-container{display: flex;}
 	.movie-details{ margin-top: 1em; display: flex;   padding: 0.5em;   flex-direction: column; text-align: left; justify-content: flex-end !important;
 	h1{font-size: 3rem; font-family: 'black'; width: 80%;}

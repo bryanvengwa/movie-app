@@ -1,12 +1,15 @@
-import { useContext, useEffect, useState } from "react";
+import React ,{ useContext, useEffect, useMemo, useState } from "react";
 import NoInternet from "../Components/NoInternet";
 import Navbar from "../Components/Navbar";
-
+import {FaStar} from 'react-icons/fa'
 import Modal from "../Components/Modals";
 import { darkThemeContext } from "../Components/Context/DarkThemContext";
 
 // const key = "9533ec88cac9ff68a885ffdcf25560f5";import React, { useEffect, useState } from 'react';
 const RandomMoviesComponent = (props) => {
+	const toggleModal = useMemo(()=>{
+		return props.toggleModal
+	},[props.toggleModal])
 	const [movies, setMovies] = useState([]);
 	const [page, setPage] = useState(1);
 	const [movieType, setMovieType] = useState("movie");
@@ -78,10 +81,7 @@ const RandomMoviesComponent = (props) => {
 
 			{/* Where i have placed the modal */}
 			{props.displayModal && (
-				<Modal
-					movieData={props.movieData}
-					toggleModal={props.toggleModal}
-				/>
+				<Modal movieData={props.movieData} toggleModal={toggleModal} />
 			)}
 			{NoInternets || (
 				<div className="movie-container">
@@ -101,7 +101,7 @@ const RandomMoviesComponent = (props) => {
 										height: "300px",
 									}}
 								/>
-								<h3>{movie["vote_average"]}</h3>
+								<h3>{movie["vote_average"]} <FaStar/> </h3>
 								<div className="overlay active-overlay">
 									<h1>{movie.original_title}</h1>
 									<p>{movie.overview}</p>
@@ -116,4 +116,4 @@ const RandomMoviesComponent = (props) => {
 	);
 };
 
-export default RandomMoviesComponent;
+export default React.memo( RandomMoviesComponent);

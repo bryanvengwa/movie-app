@@ -24,14 +24,15 @@ export default function Footer() {
 							style={{ ...styles, ...colorStyles }}
 							className="looking-button"
 						>
-							Looking For A Movie ?
+							MovieBuzz
 						</button>
 					</div>
 					<div className="right foot">
 						<p>
 							Copyright © {year}. All rights reserved. App by{" "}
 							<span>
-								<a	style={{color:`${color}`}}
+								<a
+									style={{ color: `${color}` }}
 									target="_blank"
 									rel="noopener noreferrer"
 									href="https://github.com/bryanvengwa"

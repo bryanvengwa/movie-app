@@ -1,4 +1,4 @@
-import React, { useContext,  useState } from "react";
+import React, { useCallback, useContext,  useState } from "react";
 import { FaSearch } from "react-icons/fa";
 import useFetch from "./Api calls components/DataFetcher";
 import RandomMoviesComponent from "./Api calls components/RandomMoviesComponent";
@@ -15,13 +15,13 @@ export default function Home() {
 	const [movieData, setMovieData] = useState({});
 	const [displayModal, setDisplayModal] = useState(false);
 
-	const toggleModal = (value) => {
+	const toggleModal =useCallback((value) => {
 		if (value) {
 			setDisplayModal(true);
 		} else {
 			setDisplayModal((old) => !old);
 		}
-	};
+	},[] );
 
 	const apiKey = "9533ec88cac9ff68a885ffdcf25560f5";
 
@@ -35,21 +35,23 @@ export default function Home() {
 			);
 		}
 	};
+				const dataSetter = useCallback( (movie) => {
+					setMovieData({
+						overview: movie.overview,
+						rating: movie.vote_average,
+						name: movie.title,
+						img: movie["poster_path"],
+					});
+				}, []);
 	let info;
 	let resultsElements;
 	if (data) {
 		info = data.results;
 		const resultsElementss = info.map((movie) => {
-			const dataSetter = () => {
-				setMovieData({
-					overview: movie.overview,
-					rating: movie.vote_average,
-					name: movie.title,
-					img: movie["poster_path"],
-				});
-			};
+
 			return (
 				<Result
+					movie={movie}
 					dataSetter={dataSetter}
 					overview={movie.overview}
 					rating={movie.vote_average}

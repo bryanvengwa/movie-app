@@ -9,7 +9,8 @@ import { darkThemeContext } from './Context/DarkThemContext';
 
 
 
-export default function Navbar(props) {
+function Navbar(props) {
+
   const [displaySettings, setDisplaySettings] = useState(false)
   const [movieType , setMovieType] =  useState('Movies')
   const toggleSettings =()=>{
@@ -60,3 +61,4 @@ export default function Navbar(props) {
 		</nav>
   );
 }
+export default React.memo(Navbar)
