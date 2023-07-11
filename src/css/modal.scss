@@ -53,26 +53,28 @@ $background : rgba(3,12 , 31);
 $blue : rgba(6,23 , 72);
 
 
-.modal-background{width: 100%; z-index: 200;  height: 85%; background: rgba(0, 0, 0, 0.169); backdrop-filter: blur(1px); position: absolute;bottom: 0; display: flex; align-items: center; justify-content: center;
-          .flex-container{display: flex;}
+.modal-background{width: 100%; z-index: 200;  height: 85%; background: rgba(157, 18, 18, 0.169); -webkit-backdrop-filter: blur(1px); backdrop-filter: blur(1px); position: absolute;bottom: 0; display: flex; align-items: center; justify-content: center;
+          .flex-container{display: flex; flex-direction: column; }
 	.movie-details{ margin-top: 1em; display: flex;   padding: 0.5em;   flex-direction: column; text-align: left; justify-content: flex-end !important;
-	h1{font-size: 3rem; font-family: 'black'; width: 80%;}
+	h1{font-size: 2rem; font-family: 'black'; width: 90%;}
 	h3{font-size: 1.4rem; font-family: 'medium'; }
 	// .scroll-container{overflow-y: scroll !important;}
 	.scroll{height: 100%;   }
 	} 
 	.modal-container{ position: relative; overflow-y: scroll !important;
-	.close-button{background: none; position: absolute; right: 1em; width: 8rem; font-family: 'medium';  border:2px solid red; height: 3.5em; background: black; padding: 0 2.4em; color: white; border-radius: 4px; }	
-		width: 80%;  height: 65%; background: black; padding: 1em;
+	.close-button{background: none; position: absolute; right: 1em;  font-family: 'medium';   color: white;  }	
+		width: 90%;  height: 85%; background: black; padding: 1em;
 	.img-container{width: 26rem; height:22rem; position: relative;
 	img{height: 23rem; width: 18rem; object-fit: cover; }
 	h3{position: absolute;  top: 25px; right: 25px; padding: 0.2em; color: black;  background: yellow; }
 	}
 	}
 }
+.search-btn{display: inline-grid;}
 
-
-
+.loader{
+	p{text-align: center;}
+}
 
 
 /*
@@ -94,21 +96,56 @@ No media query since this is the default in Bootstrap because it is "mobile firs
 
 /* Small devices (landscape phones, 576px and up) */
 @media (min-width: 568px) {  
-
+	
 }
 
 /* Medium devices (tablets, 768px and up) The navbar toggle appears at this breakpoint */
 @media (min-width: 768px) {  
+	.modal-background{width: 100%; z-index: 200;  height: 85%; background: rgba(157, 18, 18, 0.169); -webkit-backdrop-filter: blur(1px); backdrop-filter: blur(1px); position: absolute;bottom: 0; display: flex; align-items: center; justify-content: center;
+          .flex-container{display: flex; flex-direction: column; }
+	.movie-details{ margin-top: 1em; display: flex;   padding: 0.5em;   flex-direction: column; text-align: left; justify-content: flex-end !important;
+	h1{font-size: 2rem; font-family: 'black'; width: 90%;}
+	h3{font-size: 1.4rem; font-family: 'medium'; }
+	// .scroll-container{overflow-y: scroll !important;}
+	.scroll{height: 100%;   }
+	} 
+	.modal-container{ position: relative; overflow-y: scroll !important;
+	.close-button{background: none; position: absolute; right: 1em;  font-family: 'medium';   color: white;  }	
+		width: 90%;  height: 85%; background: black; padding: 1em;
+	.img-container{width: 26rem; height:22rem; position: relative;
+	img{height: 23rem; width: 18rem; object-fit: cover; }
+	h3{position: absolute;  top: 25px; right: 25px; padding: 0.2em; color: black;  background: yellow; }
+	}
+	}
+}
 
 }
 
 /* Large devices (desktops, 992px and up) */
 @media (min-width: 992px) { 
+	.search-btn{display: none;}
 
 }
 
 /* Extra large devices (large desktops, 1200px and up) */
 @media (min-width: 1200px) {  
+	.modal-background{width: 100%; z-index: 200;  height: 85%; background: rgba(157, 18, 18, 0.169); -webkit-backdrop-filter: blur(1px); backdrop-filter: blur(1px); position: absolute;bottom: 0; display: flex; align-items: center; justify-content: center;
+          .flex-container{display: flex; flex-direction: row;}
+	.movie-details{ margin-top: 1em; display: flex;   padding: 0.5em;   flex-direction: column; text-align: left; justify-content: flex-end !important;
+	h1{font-size: 2.5rem; font-family: 'black'; width: 80%;}
+	h3{font-size: 1.4rem; font-family: 'medium'; }
+	// .scroll-container{overflow-y: scroll !important;}
+	.scroll{height: 100%;   }
+	} 
+	.modal-container{ position: relative; overflow-y: scroll !important;
+	// .close-button{background: none; position: absolute; right: 1em; width: 8rem; font-family: 'medium';  border:2px solid red; height: 3.5em; background: black; padding: 0 2.4em; color: white; border-radius: 4px; }	
+		width: 87%;  height: 75%; background: black; padding: 1em;
+	.img-container{min-width: 22rem;  height:22rem; position: relative; background-color: red;
+	img{height: 25rem; min-width: 22rem;   object-fit: cover; }
+	h3{position: absolute;  top: 25px; right: 50px; padding: 0.2em; color: black; font-size: 1.5rem; background: yellow; }
+	}
+	}
+}
     
 }
 

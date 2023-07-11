@@ -1,25 +1,26 @@
-import React ,{useContext} from 'react'
-import '../css/modal.scss'
-import { FaStar } from 'react-icons/fa'
-import { colorContext } from "./Context/currentColorReducer";
+import React, { useContext } from "react";
+import { AiOutlineCloseCircle } from "react-icons/ai";
+import { FaStar } from "react-icons/fa";
+import "../css/modal.scss";
 import { darkThemeContext } from "./Context/DarkThemContext";
+import { colorContext } from "./Context/currentColorReducer";
 // import {FARe}
 
 export default function Modal(props) {
-    const { themeValue } = useContext(darkThemeContext);
+	const { themeValue } = useContext(darkThemeContext);
 	const styles = {
 		// backgroundColor: `${themeValue ? "initial" : "whitesmoke"}`,
 		color: `${themeValue ? "white" : "white"}`,
 	};
 
-  	const { color } = useContext(colorContext);
+	const { color } = useContext(colorContext);
 	const colorStyles = {
 		border: `3px solid ${color}`,
 	};
-  return (
+	return (
 		<div className="modal-background">
 			<div style={styles} className="modal-container">
-				<button
+				{/* <button
 					style={colorStyles}
 					onClick={() => {
 						props.toggleModal(false);
@@ -27,7 +28,16 @@ export default function Modal(props) {
 					className="close-button"
 				>
 					close
-				</button>
+				</button> */}
+				<AiOutlineCloseCircle
+					size={45}
+					
+					onClick={() => {
+						props.toggleModal(false);
+					}}
+					className="close-button"
+				/>
+
 				<div className="flex-container">
 					<div className="img-container">
 						<img
@@ -51,5 +61,5 @@ export default function Modal(props) {
 				</div>
 			</div>
 		</div>
-  );
+	);
 }

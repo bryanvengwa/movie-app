@@ -50,17 +50,33 @@ table {
 }
 @mixin button {  border:none; font-family: 'medium';  font-size: 14px; height: 3.5em; padding: 0 2.4em; border-radius: 4px; background-color:black; color: white; outline: none;}
 @mixin center {display: flex; align-items: center; justify-content: center; }
-nav{  width: 100% !important; height: 10% !important;
+.nav-pc{display: none;}
+.nav-mobile{ position: relative; width: 100% !important; height: 10% !important; display: flex; justify-content: center; align-items: center; justify-content: space-between;
+  .mobile-container{height: 100%;display: flex; justify-content: center; align-items: center;
+    .arrows{ border-radius: 50%; padding: 0.75em;   @include center; border: none; font-weight: 900; height: 2.4rem; width: 2.4rem; color: white; font-size: 2rem; background: rgba(4, 4, 12, 0.5); }
+    .dropdown-container{position: absolute; }
+    #genreDropdown{display: none;}
            .padding-container{padding: 0.5em; margin: 1em; width: 100%;         @include center; justify-content: space-between;}
            padding: 1em; position: absolute !important;  width: 100% ; top: 0; left: 0;
         @include center; justify-content: space-between;
-        .button-container{display: flex;}
-          .arrows{ border-radius: 50%; padding: 0.75em;   @include center; border: none; font-weight: 900; height: 2.4rem; width: 2.4rem; color: white; font-size: 2rem; background: rgba(4, 4, 12, 0.5); }
-          .flex-container{ display: flex; gap: 1em; margin-right: 1.4em;
+        .button-container{display: flex; margin-top: 1em;}
+          .flex-container{  display: flex; gap: 1em; margin-right: 1.4em; margin-top: 1em;
 
-                    .type-of-movie-button{background: none; width: 8rem; font-family: 'medium';  border:2px solid red; height: 3.5em; background: black; padding: 0 2.4em; color: white; border-radius: 4px; }
           }
+          .type-of-movie-button{background: none; width: 8rem; font-family: 'medium';  border:2px solid red; height: 3.5em; background: black; padding: 0 2.4em; color: white; border-radius: 4px; }
           .wheel{color: rgba(255, 255, 255, 0.308); cursor: pointer;  animation: rotating 4s  infinite linear; font-size: 2.9rem;  }
+  }
+  .bar-container{ position: absolute; right: 0; top: 5.7rem; z-index: 400; background: white; border-radius: 5px; border: 2px solid grey; padding: 1em; display: flex; gap: 1rem; flex-direction: column; width: 21rem; min-height: 9em; 
+font-family: 'heavy'; text-align: center;
+          .colour-container{ display: flex; gap: 1em; align-items: center; justify-content: center;
+          .color{height: 3rem;  width:3rem; border-radius: 50%; cursor: pointer;   }
+          } 
+          .bottom-container{display: flex; justify-content: center; align-items: center;
+                    .toggler{display: flex; justify-content: center; gap: 0.1em; align-items: center; height: 4rem; width: 70%;cursor: pointer; padding: 0.3em;  }
+          .bulb{color: black; font-size: 2rem; margin-top: -0.4em; }
+          }
+
+}
 }
 
 .holder{position: relative;}
@@ -68,17 +84,17 @@ nav{  width: 100% !important; height: 10% !important;
           @include button; position: relative; width: 170px;
     }
 
-.dropdown-container{z-index: 400; width: 80%;  top: 3.4em; padding: 0.5em; left:5%; font-family: 'light'; display: flex; position: absolute; flex-direction: column;  color: black; background: rgba(255, 255, 255, 0.145); backdrop-filter: blur(30px); 
+.dropdown-container{z-index: 400; width: 100%;  top: 3.4em; height: 70vh; left:0; font-family: 'light'; display: flex; overflow-y: scroll; position: absolute; flex-direction: column; text-align: center;  color: black; background: rgba(255, 255, 255, 0.145); backdrop-filter: blur(30px); 
 }
 .dropdown-container{  p:hover{color: white;}}
-.bar-container{ position: absolute; top: 5.5rem; z-index: 400; background: white; border-radius: 5px; border: 2px solid grey; padding: 1em; display: flex; gap: 1rem; flex-direction: column; width: 20rem; height: 9em; 
-font-family: 'heavy';
-          .colour-container{ display: flex; gap: 1em;
-          .color{height: 3rem;  width:3rem; border-radius: 50%; cursor: pointer;   }
+.bar-container{ position: absolute; top: 5.5rem; z-index: 400; background: white; border-radius: 5px; border: 2px solid grey; padding: 1em; display: flex; gap: 1rem; flex-direction: column; width: 25rem; 
+font-family: 'heavy'; text-align: center;
+          .colour-container{ display: flex; gap: 1em; align-items: center; justify-content: center;
+          .color{height: 3rem;  width:3rem; border-radius: 50%; cursor: pointer;    }
           } 
           .bottom-container{display: flex; justify-content: center; align-items: center;
-                    .toggler{display: flex; justify-content: center; align-items: center; width: 8rem; cursor: pointer; padding: 0.3em; border: 2px solid black; }
-          .bulb{color: black; font-size: 2rem; }
+                    .toggler{display: flex; justify-content: center; font-size: 0.4rem;font-family: 'heavy'; gap: 0.1em; align-items: center; height: 4rem; width: 60%;cursor: pointer; padding: 0.3em;  }
+          .bulb{color: black; font-size: 2rem; margin-top: -0.4em; }
           }
 
 }
@@ -88,13 +104,23 @@ font-family: 'heavy';
   to{ transform: rotate(1turn);}
   
 }
-.wheel:hover{transform: scale(1.8) !important;}
-.active{ animation: active 0.01s   linear; }
+.wheel:hover{animation: none;}
+.active{ animation: active 0.01s   linear; border: 30px solid transparent; }
 @keyframes active{
   from{ transform: translateY(-0.5em);}
   to{ transform:  translateY(0em);}
   
 }
+.menu{ background: rgba(128, 128, 128, 0.612); padding: 0.1em; border-radius: 5px; display: flex; justify-content: center; align-items: center; flex-direction: column;
+          z-index: 3000;  height: 3.7rem; width: 4rem; right: 1em; top: 1em !important;
+        .bar{ border-radius: 5px; background: black; z-index: 3000; margin: 0.2em; height: 6px; width: 80%; }
+  transition: all 0.7s ease-in-out;
+    }  
+    .open{ .one{transform: rotate(45deg) translate(8px , 4px);}
+           .two{display: none;}
+           .three{transform: rotate(-45deg) translate(4px , -1px); ;}
+
+    } 
 /*
 ####################################################
 M E D I A  Q U E R I E S
@@ -119,11 +145,29 @@ No media query since this is the default in Bootstrap because it is "mobile firs
 
 /* Medium devices (tablets, 768px and up) The navbar toggle appears at this breakpoint */
 @media (min-width: 768px) {  
+   .nav-mobile{
+    .mobile-container{ #genreDropdown{display: block;}
+
+   }
+}
 
 }
 
 /* Large devices (desktops, 992px and up) */
 @media (min-width: 992px) { 
+    .nav-mobile{ display:none;}
+ .nav-pc{ display: block;  width: 100% !important; height: 10% !important;
+           .padding-container{padding: 0.5em; height: 100%;  margin: 1em; width: 100%;         @include center; justify-content: space-between;}
+           padding: 1em; position: absolute !important;  width: 100% ; top: 0; left: 0;
+        @include center; justify-content: space-between;
+        .button-container{display: flex; height: 100%; }
+          .arrows{ border-radius: 50%; padding: 0.75em;   @include center; border: none; font-weight: 900; height: 2.4rem; width: 2.4rem; color: white; font-size: 2rem; background: rgba(4, 4, 12, 0.5); }
+          .flex-container{ display: flex; gap: 1em; height: 100%; margin-right: 1.4em;
+
+                    .type-of-movie-button{background: none; width: 8rem; font-family: 'medium';  border:2px solid red; height: 3.5em; background: black; padding: 0 2.4em; color: white; border-radius: 4px; }
+          }
+          .wheel{color: rgba(255, 255, 255, 0.308); cursor: pointer;  animation: rotating 17s  infinite linear; font-size: 2.9rem;  }
+}
 
 }
 

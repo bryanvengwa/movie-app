@@ -1,24 +1,4 @@
-// <p value="">All Genres</p>
-// 		<p value="28">Action</p>
-// 		<p value="12">Adventure</p>
-// 		<p value="16">Animation</p>
-// 		<p value="35">Comedy</p>
-// 		<p value="80">Crime</p>
-// 		<p value="99">Documentary</p>
-// 		<p value="18">Drama</p>
-// 		<p value="10751">Family</p>
-// 		<p value="14">Fantasy</p>
-// 		<p value="36">History</p>
-// 		<p value="27">Horror</p>
-// 		<p value="10402">Music</p>
-// 		<p value="9648">Mystery</p>
-// 		<p value="10749">Romance</p>
-// 		<p value="878">Science Fiction</p>
-// 		<p value="53">Thriller</p>
-// 		<p value="10752">War</p>
-// 		<p value="37">Western</p>
-
- const dropData = [
+const dropData = [
 	{
 		id: 0,
 		name: "All Genres",

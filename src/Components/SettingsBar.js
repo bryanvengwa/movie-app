@@ -26,13 +26,13 @@ export default function SettingsBar() {
 				<div className="colour-container">{colorElements}</div>
 				<div className="bottom-container">
 					<div onClick={toggleDarkTheme} className="toggler">
-						<h2
+						<h4
 							style={{
 								color: `${themeValue ? "black" : "black"}`,
 							}}
 						>
 							Too {`${themeValue ? "Dark?" : "Bright?"}`}
-						</h2>{" "}
+						</h4>{" "}
 						<br />
 						<FaLightbulb
 							style={{

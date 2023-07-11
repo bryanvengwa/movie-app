@@ -12,10 +12,11 @@ export default function Result(props) {
 		<>
 			{props.id || (
 				<div
+					data-bs-dismiss={props['data-bs-dismiss']}
 					style={styles}
-					onClick={()=>{
-						props.dataSetter(props.movie)
-						props.toggleModal(true)
+					onClick={() => {
+						props.dataSetter(props.movie);
+						props.toggleModal(true);
 					}}
 					className="result"
 				>

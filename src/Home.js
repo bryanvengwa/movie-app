@@ -9,6 +9,7 @@ import NoInternet from "./Components/NoInternet";
 import MovieNotFound from "./Components/MovieNotFound";
 import { darkThemeContext } from "./Components/Context/DarkThemContext";
 import { colorContext } from "./Components/Context/currentColorReducer";
+import SearchCanvas from "./Components/SearchCanvas";
 export default function Home() {
 	const [value, setValue] = useState("");
 	const [url, setUrl] = useState("");
@@ -45,6 +46,7 @@ export default function Home() {
 				}, []);
 	let info;
 	let resultsElements;
+	let canvaResults;
 	if (data) {
 		info = data.results;
 		const resultsElementss = info.map((movie) => {
@@ -52,6 +54,7 @@ export default function Home() {
 			return (
 				<Result
 					movie={movie}
+					data-bs-dismiss=" "
 					dataSetter={dataSetter}
 					overview={movie.overview}
 					rating={movie.vote_average}
@@ -62,6 +65,22 @@ export default function Home() {
 				/>
 			);
 		});
+		const canva = info.map((movie) => {
+			return (
+				<Result
+					movie={movie}
+					dataSetter={dataSetter}
+					overview={movie.overview}
+					rating={movie.vote_average}
+					key={movie.id}
+					data-bs-dismiss="offcanvas"
+					toggleModal={toggleModal}
+					name={movie.title}
+					img={movie["poster_path"]}
+				/>
+			);
+		});
+		canvaResults = canva
 		resultsElements = resultsElementss;
 	}
 	const handleValueChange = (e) => {
@@ -76,23 +95,14 @@ export default function Home() {
 		}`,
 		color: `${themeValue ? "white" : "black"}`,
 	};
-	// COLOR Context
+  
 	const { color } = useContext(colorContext);
 	const homeStyles = {
 		backgroundColor: `${themeValue ? "black" : `${color}`}`,
 		color: `${themeValue ? "white" : "black"}`,
 	};
 
-	// submit on enter functionality
-	// useEffect(() => {
-	// 	const form = document.querySelector(".search-input");
-	// 	form.addEventListener("keypress", function (event) {
-	// 		if (event.keyCode === 13) {
-	// 			event.preventDefault();
-	// 			form.submit();
-	// 		}
-	// 	});
-	// });
+
 	const handleEnterPress = (event) => {
 		if (event.keyCode === 13) {
 			event.preventDefault();
@@ -102,6 +112,16 @@ export default function Home() {
 	};
 	return (
 		<div style={homeStyles} className="home">
+			<SearchCanvas
+				styles={styles}
+				value={value}
+				handleEnterPress={handleEnterPress}
+				handleValueChange={handleValueChange}
+				searcher={searcher}
+				isLoading={isLoading}
+				resultsElements={canvaResults}
+				error={error}
+			/>
 			<div className="sides-container">
 				<div style={styles} className="left-side side">
 					<div className="search-container">

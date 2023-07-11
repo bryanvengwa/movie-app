@@ -54,11 +54,12 @@ $blue : rgba(6,23 , 72);
 body{
   $background : rgba(3,12 , 31);
 }
+
 @mixin center{
    display: flex; justify-content: center; align-items: center !important; 
 }
 .home{overflow-y: hidden !important; overflow-x: scroll; 
-.sides-container{min-width: 820px;}
+// .sides-container{min-width: 820px;}
 }
 button{cursor: pointer ;}
 button:hover{transform: scale(1.05);}
@@ -77,7 +78,7 @@ img{height: 100%; width: 100%; position: relative; object-fit: cover; }
 .home{background: black; min-height: 100vh; min-width: 100vw;
   .sides-container{display: flex;}
   .side{margin: 1em;}
-.left-side{background: rgba(18, 18, 18, ); border-radius: 7px; width: 30%;
+.left-side{background: rgba(18, 18, 18, ); display: none; border-radius: 7px; width: 30%;
   .search-container{@include center; height: 14%; width: 100%;
   input{   display: flex; align-items: center; justify-content: center; color: white;  width: 70%;  height: 3rem; border-radius: 200px; background: rgba(18, 18, 18, ); border: 2px solid white; outline: none; }
    .search-input::placeholder {
@@ -91,8 +92,9 @@ img{height: 100%; width: 100%; position: relative; object-fit: cover; }
   }
 height: 85vh;
 }
-footer{height: 12vh; min-width: 820px; width: 100%; background: rgba(18, 18, 18, ); }
-.right-side{ position: relative !important; background: rgba(18, 18, 18, ); border-radius: 7px;  width: 70%; height: 85vh; }
+.position-fixed{z-index: 7000;}
+footer{height: 12vh; width: 100%; background: rgba(18, 18, 18, ); }
+.right-side{ position: relative !important; background: rgba(18, 18, 18, ); border-radius: 7px;  width: 100%; height: 85vh; }
 }
 .movie-containers{display: flex; justify-content: center;}
 .movie-container{ background: rgba(36, 35, 35, 0.143);   position: absolute; left: 0;
@@ -107,7 +109,7 @@ footer{height: 12vh; min-width: 820px; width: 100%; background: rgba(18, 18, 18,
  background: rgba(36, 35, 35, 0.143)
 }
  .result{ margin: unset; width: 90%; height: 5rem; @include center;   border-radius: 5px; background: black;
-h2{  font-family: 'medium'; text-align: left;}
+h2{  font-family: 'light'; font-size: 1rem; text-align: left;}
 .img-container{height: 4.3rem; width: 4.3rem; 
 img{height: 100%; width: 100%; object-fit: cover; }
 }
@@ -119,8 +121,10 @@ img{height: 100%; width: 100%; object-fit: cover; }
   img{position: relative; object-fit: cover;}
   h1{font-family: 'black'; margin-top: 1.5em;}
   p{font-family: 'light';}
-  h3{position: absolute; top: 25px; right: 25px; padding: 0.2em; color: black;  background: yellow; }
-  .overlay{  @include center ; justify-content: center !important; align-items: center !important; background: $backgroundmovie; overflow-y: scroll; color: white; flex-direction: column;  border: 1px solid red; position: absolute; bottom: 0px; left: 0px; width: 100%; height: 100%; display: none; }
+  h3{position: absolute; font-size: 1.1rem; top: 25px; right: 25px; padding: 0.2em; color: black;  background: yellow; }
+  .overlay{  @include center ; justify-content: center !important; align-items: center !important; background: $backgroundmovie; overflow-y: scroll; color: white; flex-direction: column;  border: 1px solid red; position: absolute; bottom: 0px; left: 0px; width: 100%; height: 100%; display: none; 
+  h1{font-size: 1.5rem;}
+  }
   
 }
 .random-movie:hover {.active-overlay{ display: block;}}
@@ -140,7 +144,7 @@ img{height: 100%; width: 100%; object-fit: cover; }
       border-radius: 50%;
     }
   }  
-  footer{.footer{color: white; display: flex; height: 100%; width: 100%; align-items: center; justify-content: center; justify-content: space-between; }
+  footer{ .footer{color: white; display: flex; height: 100%; width: 100%; align-items: center; justify-content: center; justify-content: space-between; }
 .foot{padding: 1em;}
 p{font-family: 'medium'; 
 span{
@@ -172,6 +176,32 @@ span{
   color: white;
   font-family: 'medium';
 }
+// 
+.offcanvas-header{background: rgba(18, 18, 18, );}
+.offcanvas-body{ display: flex ;  overflow-y: scroll; background: rgba(18, 18, 18, );
+
+  .search-canvas{display: block; min-height: 45rem; 
+    //  margin-top: 25em;
+  width: 120%;
+  .search-container{@include center; height: 14%; width: 100%;
+  input{   display: flex; align-items: center; justify-content: center; color: white;  width: 70%;  height: 3rem; border-radius: 200px; background: rgba(18, 18, 18, ); border: 2px solid white; outline: none; }
+   .search-input::placeholder {
+  text-align: center; color: white; font-size: 1rem;
+}
+
+
+  .search{color: white;   position: relative;
+  top: 0;
+  left: -3rem;
+  padding: 0 10px;}
+  }
+
+  }
+}
+
+.reload-button{@include center; padding: 0.7em 1.5em; background-color: black; color: white; }
+.search-btn{ display: block; position: absolute; z-index: 400; left: 0; top: 10rem; height: 4rem; width: 4rem;  display: flex; justify-content: center; align-items: center; background-color: whitesmoke; border-top-right-radius: 12px; border-bottom-right-radius: 12px; }
+.search-btn:hover{ .search-button{transform: scale(1.2);}}
 /*
 ####################################################
 M E D I A  Q U E R I E S
@@ -201,7 +231,12 @@ No media query since this is the default in Bootstrap because it is "mobile firs
 
 /* Large devices (desktops, 992px and up) */
 @media (min-width: 992px) { 
+  .search-btn{display: nonecc;}
+  .sides-container{
 
+  .left-side{display: block;}
+  .right-side{width: 70%;}
+  }
 }
 
 /* Extra large devices (large desktops, 1200px and up) */

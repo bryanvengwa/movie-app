@@ -1,15 +1,55 @@
-import React ,{ useContext, useEffect, useMemo, useState } from "react";
+import React, {
+	useContext,
+	useEffect,
+	useMemo,
+	useReducer,
+	useState,
+} from "react";
 import NoInternet from "../Components/NoInternet";
+import Reload from "../Components/Reload";
 import Navbar from "../Components/Navbar";
-import {FaStar} from 'react-icons/fa'
+import { FaStar } from "react-icons/fa";
 import Modal from "../Components/Modals";
+import Loader from "../Components/Loader";
 import { darkThemeContext } from "../Components/Context/DarkThemContext";
 
 // const key = "9533ec88cac9ff68a885ffdcf25560f5";import React, { useEffect, useState } from 'react';
 const RandomMoviesComponent = (props) => {
-	const toggleModal = useMemo(()=>{
-		return props.toggleModal
-	},[props.toggleModal])
+	const randomReducer = (state, action) => {
+		switch (action.type) {
+			case "loading":
+				return {
+					loader: true,
+					data: false,
+					reload: false,
+				};
+			case "complete":
+				return {
+					loader: false,
+					data: true,
+					reload: false,
+				};
+			case "in_complete":
+				return {
+					loader: false,
+					data: false,
+					reload: true,
+				};
+
+			default:
+				return state;
+		}
+	};
+	const initialState = {
+		loader: true,
+		data: false,
+		reload: false,
+	};
+	const [state, dispatch] = useReducer(randomReducer, initialState);
+
+	const toggleModal = useMemo(() => {
+		return props.toggleModal;
+	}, [props.toggleModal]);
 	const [movies, setMovies] = useState([]);
 	const [page, setPage] = useState(1);
 	const [movieType, setMovieType] = useState("movie");
@@ -29,18 +69,23 @@ const RandomMoviesComponent = (props) => {
 			const url = `https://api.themoviedb.org/3/discover/${movieType}?api_key=${apiKey}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${page}${genre}`;
 
 			try {
+				dispatch({ type: "loading" });
 				const response = await fetch(url);
 				const data = await response.json();
+				console.log(data);
 
 				if (!data.total_results) {
+					dispatch({ type: "in_complete" });
 					throw new Error("no internet");
 				} else {
 					setNoInternets((old) => !old);
-
+					
 					setMovies(data.results);
+					dispatch({ type: "complete" });
 				}
 			} catch (error) {
-				console.error(error);
+				dispatch({ type: "in_complete" });
+				console.error(error, 'here');
 			}
 		};
 		fetchMovies();
@@ -48,7 +93,9 @@ const RandomMoviesComponent = (props) => {
 	const changeMovieType = () => {
 		setMovieType((movieType) => (movieType === "movie" ? "tv" : "movie"));
 	};
-
+	const reloader = () => {
+		setPage(page + 1);
+	};
 	const handleNextPage = () => {
 		setPage(page + 1);
 	};
@@ -60,7 +107,7 @@ const RandomMoviesComponent = (props) => {
 		if (movie.poster_path) {
 			return `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
 		} else {
-			// Use a placeholder image if no poster is available
+			
 			return "https://via.placeholder.com/500x750";
 		}
 	};
@@ -83,7 +130,7 @@ const RandomMoviesComponent = (props) => {
 			{props.displayModal && (
 				<Modal movieData={props.movieData} toggleModal={toggleModal} />
 			)}
-			{NoInternets || (
+			{state.data && (
 				<div className="movie-container">
 					<div
 						className="movie-containers"
@@ -101,7 +148,9 @@ const RandomMoviesComponent = (props) => {
 										height: "300px",
 									}}
 								/>
-								<h3>{movie["vote_average"]} <FaStar/> </h3>
+								<h3>
+									{movie["vote_average"]} <FaStar />{" "}
+								</h3>
 								<div className="overlay active-overlay">
 									<h1>{movie.original_title}</h1>
 									<p>{movie.overview}</p>
@@ -111,9 +160,10 @@ const RandomMoviesComponent = (props) => {
 					</div>
 				</div>
 			)}
-			{NoInternets && <NoInternet />}
+			{state.loader && <Loader />}
+			{state.reload && <Reload reloader={reloader} />}
 		</div>
 	);
 };
 
-export default React.memo( RandomMoviesComponent);
+export default React.memo(RandomMoviesComponent);
