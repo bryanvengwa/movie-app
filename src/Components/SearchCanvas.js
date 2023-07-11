@@ -33,7 +33,7 @@ export default function SearchCanvas(props) {
 					<AiOutlineCloseCircle
 						style={{ color: "white" }}
 						color={"white"}
-						size={45}
+						size={60}
 						type="button"
 						
 						data-bs-dismiss="offcanvas"

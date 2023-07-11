@@ -5,13 +5,12 @@ import React, {
 	useReducer,
 	useState,
 } from "react";
-import NoInternet from "../Components/NoInternet";
-import Reload from "../Components/Reload";
-import Navbar from "../Components/Navbar";
 import { FaStar } from "react-icons/fa";
-import Modal from "../Components/Modals";
-import Loader from "../Components/Loader";
 import { darkThemeContext } from "../Components/Context/DarkThemContext";
+import Loader from "../Components/Loader";
+import Modal from "../Components/Modals";
+import Navbar from "../Components/Navbar";
+import Reload from "../Components/Reload";
 
 // const key = "9533ec88cac9ff68a885ffdcf25560f5";import React, { useEffect, useState } from 'react';
 const RandomMoviesComponent = (props) => {
@@ -54,6 +53,7 @@ const RandomMoviesComponent = (props) => {
 	const [page, setPage] = useState(1);
 	const [movieType, setMovieType] = useState("movie");
 	const [genre, setGenre] = useState("");
+	// es-lint-desable-next-line
 	const [NoInternets, setNoInternets] = useState(false);
 
 	const genreSetter = (id) => {

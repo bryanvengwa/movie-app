@@ -62,8 +62,8 @@ $blue : rgba(6,23 , 72);
 	.scroll{height: 100%;   }
 	} 
 	.modal-container{ position: relative; overflow-y: scroll !important;
-	.close-button{background: none; position: absolute; right: 1em;  font-family: 'medium';   color: white;  }	
-		width: 90%;  height: 85%; background: black; padding: 1em;
+	.close-button{ position: absolute; right: 1em; z-index: 500 !important;   }	
+		width: 90%;  height: 85%; background: black; padding: 1em; 
 	.img-container{width: 26rem; height:22rem; position: relative;
 	img{height: 23rem; width: 18rem; object-fit: cover; }
 	h3{position: absolute;  top: 25px; right: 25px; padding: 0.2em; color: black;  background: yellow; }

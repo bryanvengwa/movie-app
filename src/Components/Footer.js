@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import { darkThemeContext } from "./Context/DarkThemContext";
 import { colorContext } from "./Context/currentColorReducer";
 

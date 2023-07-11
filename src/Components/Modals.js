@@ -14,9 +14,9 @@ export default function Modal(props) {
 	};
 
 	const { color } = useContext(colorContext);
-	const colorStyles = {
-		border: `3px solid ${color}`,
-	};
+	// const colorStyles = {
+	// 	border: `3px solid ${color}`,
+	// };
 	return (
 		<div className="modal-background">
 			<div style={styles} className="modal-container">
@@ -31,6 +31,7 @@ export default function Modal(props) {
 				</button> */}
 				<AiOutlineCloseCircle
 					size={45}
+					// color={color}
 					
 					onClick={() => {
 						props.toggleModal(false);

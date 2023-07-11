@@ -104,7 +104,12 @@ export default function Home() {
 
 
 	const handleEnterPress = (event) => {
-		if (event.keyCode === 13) {
+		if (
+			event.keyCode === 13 ||
+			event.key === "Enter" ||
+			event.key === "Done" ||
+			event.key === "Return"
+		) {
 			event.preventDefault();
 
 			searcher();
